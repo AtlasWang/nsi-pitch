@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurosymbolic Intelligence Inc. — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #06090f;
+  --bg-card: rgba(255,255,255,0.03);
+  --bg-glass: rgba(255,255,255,0.05);
+  --border-glass: rgba(255,255,255,0.08);
+  --text-primary: #e8edf5;
+  --text-secondary: rgba(255,255,255,0.55);
+  --text-dim: rgba(255,255,255,0.35);
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --accent-rose: #f43f5e;
+  --accent-amber: #f59e0b;
+  --accent-emerald: #10b981;
+  --gradient-hero: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 50%, #06b6d4 100%);
+  --gradient-card: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05));
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ NAV DOTS ═══ */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.nav-dot:hover { border-color: rgba(255,255,255,0.6); }
+.nav-dot.active {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 12px rgba(139,92,246,0.5);
+  transform: scale(1.3);
+}
+.nav-dot .tooltip {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+.nav-dot:hover .tooltip { opacity: 1; }
+
+/* ═══ SLIDE BASE ═══ */
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 80px;
+}
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ═══ TYPOGRAPHY ═══ */
+.slide-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-violet);
+  margin-bottom: 16px;
+}
+.slide-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.slide-title em {
+  font-style: italic;
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ GLASS CARD ═══ */
+.glass {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 1: HERO / TITLE
+   ═══════════════════════════════════════ */
+#slide-1 {
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg-deep);
+}
+#slide-1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,92,246,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(59,130,246,0.06) 0%, transparent 70%);
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(var(--dx)); opacity: 0; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.hero-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.hero-logo svg {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 0 30px rgba(139,92,246,0.3));
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.hero-tagline strong {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 400;
+}
+
+.hero-line {
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-hero);
+  border-radius: 2px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+.scroll-hint span {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1.5px solid var(--text-dim);
+  border-bottom: 1.5px solid var(--text-dim);
+  transform: rotate(45deg);
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 2: PARADIGM SHIFT
+   ═══════════════════════════════════════ */
+#slide-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+#slide-2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(139,92,246,0.04) 0%, transparent 100%);
+}
+
+.paradigm-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.paradigm-left .slide-title {
+  font-size: clamp(36px, 4vw, 60px);
+}
+
+.paradigm-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+}
+
+.paradigm-block {
+  position: relative;
+  padding-left: 24px;
+}
+.paradigm-block::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px;
+}
+.paradigm-block.state::before {
+  background: rgba(255,255,255,0.15);
+}
+.paradigm-block.vision::before {
+  background: var(--gradient-hero);
+}
+
+.paradigm-block h3 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.paradigm-block.state h3 { color: var(--text-dim); }
+.paradigm-block.vision h3 { color: var(--accent-violet); }
+
+.paradigm-block p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.paradigm-block p em {
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 3: SYMBOLS ENABLE VERIFICATION
+   ═══════════════════════════════════════ */
+#slide-3 {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+}
+
+.verify-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.verify-sidebar-item {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  padding: 14px 18px;
+  border-left: 2px solid rgba(255,255,255,0.06);
+  transition: all 0.3s;
+}
+.verify-sidebar-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.verify-staircase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding: 40px;
+}
+
+.stair-step {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 28px;
+  border-radius: 12px;
+  transition: all 0.4s;
+  position: relative;
+}
+.stair-step:not(.stair-apex) {
+  margin-left: calc(var(--step) * 60px);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.stair-apex {
+  margin-left: calc(var(--step) * 60px);
+  background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.1));
+  border: 1px solid rgba(139,92,246,0.3);
+  padding: 24px 28px;
+}
+
+.stair-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+.stair-step:not(.stair-apex) .stair-icon {
+  background: rgba(255,255,255,0.05);
+}
+.stair-apex .stair-icon {
+  background: var(--gradient-hero);
+}
+
+.stair-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+.stair-apex .stair-text {
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.stair-connector {
+  width: 2px;
+  height: 20px;
+  margin-left: calc(var(--step) * 60px + 42px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(139,92,246,0.2));
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 4: TEAM
+   ═══════════════════════════════════════ */
+#slide-4 {
+  flex-direction: column;
+  gap: 48px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.team-header {
+  text-align: center;
+  max-width: 700px;
+}
+.team-header .slide-title {
+  font-size: clamp(30px, 3.5vw, 46px);
+}
+
+.team-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.team-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px 20px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  transition: all 0.4s;
+  text-align: center;
+}
+.team-card:hover {
+  border-color: rgba(139,92,246,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.team-card.founder { width: 220px; }
+.team-card.core { width: 180px; }
+.team-card.advisor { width: 170px; }
+
+.team-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 2.5px;
+  background: linear-gradient(135deg, var(--accent-violet), var(--accent-blue));
+}
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.founder .team-avatar { width: 80px; height: 80px; }
+.advisor .team-avatar { background: linear-gradient(135deg, #f59e0b, #f97316); }
+
+.team-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.team-role {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.team-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  max-width: 180px;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 5: HIGH STAKES
+   ═══════════════════════════════════════ */
+#slide-5 {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+}
+
+.stakes-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+.stakes-left .slide-title {
+  font-size: clamp(32px, 3.5vw, 50px);
+}
+
+.stakes-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.stakes-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+.stakes-point .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-violet);
+  flex-shrink: 0;
+}
+
+.stakes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-content: center;
+}
+
+.stakes-card {
+  padding: 36px 28px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  transition: all 0.4s;
+}
+.stakes-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139,92,246,0.2);
+}
+.stakes-card.highlighted {
+  background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(59,130,246,0.08));
+  border-color: rgba(139,92,246,0.35);
+  box-shadow: 0 0 40px rgba(139,92,246,0.1);
+}
+
+.stakes-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.stakes-card:not(.highlighted) .stakes-icon {
+  background: rgba(255,255,255,0.05);
+}
+.highlighted .stakes-icon {
+  background: var(--gradient-hero);
+}
+
+.stakes-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 6: MARKET
+   ═══════════════════════════════════════ */
+#slide-6 {
+  flex-direction: column;
+  gap: 56px;
+}
+
+.market-header {
+  text-align: center;
+}
+.market-header .slide-title {
+  font-size: clamp(30px, 3.5vw, 50px);
+}
+
+.market-chart {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 900px;
+  height: 340px;
+  position: relative;
+  padding-bottom: 50px;
+}
+
+.market-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 240px;
+}
+.market-group-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.market-bars {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 260px;
+}
+
+.market-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.market-bar {
+  width: 52px;
+  border-radius: 8px 8px 2px 2px;
+  position: relative;
+  transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
+  height: 0;
+}
+.market-bar.y2025 {
+  background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06));
+}
+.market-bar.y2030 {
+  background: linear-gradient(180deg, var(--accent-violet), var(--accent-blue));
+}
+.market-bar .bar-label {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.market-legend {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.legend-swatch.y2025 { background: rgba(255,255,255,0.15); }
+.legend-swatch.y2030 { background: var(--accent-violet); }
+
+/* ═══════════════════════════════════════
+   SLIDE 7: BUSINESS MODEL
+   ═══════════════════════════════════════ */
+#slide-7 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.biz-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+.biz-left .slide-title {
+  font-size: clamp(30px, 3.5vw, 50px);
+}
+
+.vaas-heading {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+}
+
+.biz-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.biz-card {
+  padding: 24px;
+  border-radius: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+}
+.biz-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.biz-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.biz-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flywheel {
+  width: 360px;
+  height: 360px;
+  position: relative;
+}
+.flywheel svg.fw-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Animated flowing dots along the ring */
+.fw-flow-dot {
+  fill: #8b5cf6;
+  filter: drop-shadow(0 0 6px rgba(139,92,246,0.8));
+}
+.fw-flow-dot:nth-child(1) { animation: fwOrbit 6s linear infinite; }
+.fw-flow-dot:nth-child(2) { animation: fwOrbit 6s linear infinite 2s; }
+.fw-flow-dot:nth-child(3) { animation: fwOrbit 6s linear infinite 4s; }
+
+@keyframes fwOrbit {
+  0%   { opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Pulsing glow behind the ring */
+.fw-glow {
+  position: absolute;
+  inset: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+  animation: fwGlowPulse 4s ease-in-out infinite;
+}
+@keyframes fwGlowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Center label */
+.fw-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.fw-center-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+.fw-center-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* Nodes */
+.flywheel-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+.flywheel-node-dot {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: var(--bg-deep);
+  border: 2px solid;
+  transition: all 0.4s;
+}
+.flywheel-node-dot:hover {
+  transform: scale(1.15);
+}
+.fw-data .flywheel-node-dot {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 24px rgba(6,182,212,0.25);
+}
+.fw-training .flywheel-node-dot {
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 24px rgba(139,92,246,0.25);
+}
+.fw-deploy .flywheel-node-dot {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 24px rgba(59,130,246,0.25);
+}
+.flywheel-node-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.fw-data .flywheel-node-label { color: var(--accent-cyan); }
+.fw-training .flywheel-node-label { color: var(--accent-violet); }
+.fw-deploy .flywheel-node-label { color: var(--accent-blue); }
+
+/* 3 nodes at 120° intervals: top-center, bottom-right, bottom-left */
+.fw-data { top: -20px; left: 50%; transform: translateX(-50%); }
+.fw-training { top: 56%; right: -48px; }
+.fw-deploy { top: 56%; left: -48px; }
+
+/* Arrow connector labels */
+.fw-arrow-label {
+  position: absolute;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+.fw-arrow-label.al-right { right: -12px; top: 32%; transform: rotate(0deg); }
+.fw-arrow-label.al-bottom { left: 76%; bottom: 22%; }
+.fw-arrow-label.al-left { left: -4px; top: 68%; }
+
+/* ═══════════════════════════════════════
+   SLIDE 8: TRACTION
+   ═══════════════════════════════════════ */
+#slide-8 {
+  flex-direction: column;
+  gap: 48px;
+}
+
+.traction-header {
+  text-align: center;
+}
+.traction-header .slide-title {
+  font-size: clamp(30px, 3.5vw, 50px);
+}
+.traction-founded {
+  font-size: 17px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.traction-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.traction-col {
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+}
+.traction-col h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.traction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.traction-item .tick {
+  color: var(--accent-emerald);
+  font-size: 14px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.traction-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.partner-logos {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+}
+.partner-logo {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.partner-logo:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 9: LOGISTICS USE CASE (HERO)
+   ═══════════════════════════════════════ */
+#slide-9 {
+  flex-direction: column;
+  gap: 48px;
+  background: linear-gradient(180deg, rgba(139,92,246,0.06) 0%, var(--bg-deep) 50%, rgba(59,130,246,0.04) 100%);
+}
+#slide-9::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.06) 0%, transparent 50%);
+}
+
+/* Animated network lines */
+.logistics-network {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.15;
+}
+.network-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-violet), transparent);
+  animation: networkPulse 4s ease-in-out infinite;
+}
+.network-node {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 0 12px var(--accent-blue);
+  animation: nodePulse 3s ease-in-out infinite;
+}
+
+@keyframes networkPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+@keyframes nodePulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.8); opacity: 1; }
+}
+
+.logistics-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+}
+
+.logistics-opener {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 48px;
+  line-height: 1.3;
+}
+
+.pain-points {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.pain-point {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: rgba(244,63,94,0.04);
+  border: 1px solid rgba(244,63,94,0.12);
+}
+.pain-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(244,63,94,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-rose);
+  font-size: 18px;
+}
+.pain-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.pain-text strong {
+  color: var(--text-primary);
+}
+.pain-arrow {
+  color: var(--accent-rose);
+  font-family: var(--font-mono);
+}
+
+.logistics-conclusion {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.06));
+  border: 1px solid rgba(139,92,246,0.25);
+  font-size: 17px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 10: CAPABILITIES
+   ═══════════════════════════════════════ */
+#slide-10 {
+  flex-direction: column;
+  gap: 48px;
+}
+
+.cap-header {
+  text-align: center;
+}
+.cap-header .slide-title {
+  font-size: clamp(28px, 3.5vw, 46px);
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1060px;
+}
+
+.cap-card {
+  padding: 28px 24px;
+  border-radius: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  transition: all 0.4s;
+}
+.cap-card:hover {
+  border-color: rgba(139,92,246,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.cap-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--gradient-card);
+  border: 1px solid rgba(139,92,246,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.cap-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.cap-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 11: PROOF OF CONCEPT
+   ═══════════════════════════════════════ */
+#slide-11 {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 60px;
+}
+
+.poc-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+.poc-left .slide-title {
+  font-size: clamp(30px, 3.5vw, 48px);
+}
+
+.poc-callouts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.poc-callout {
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.poc-callout.highlight {
+  background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(6,182,212,0.08));
+  border: 1px solid rgba(16,185,129,0.25);
+  color: var(--accent-emerald);
+}
+.poc-callout.metric {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+}
+
+.poc-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.poc-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 48px;
+  height: 320px;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.poc-chart::before {
+  content: '';
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+.poc-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.poc-bars {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  height: 230px;
+}
+.poc-bar {
+  width: 44px;
+  border-radius: 6px 6px 2px 2px;
+  position: relative;
+  transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
+  height: 0;
+}
+.poc-bar.robotics { background: linear-gradient(180deg, var(--accent-rose), rgba(244,63,94,0.6)); }
+.poc-bar.logistics { background: linear-gradient(180deg, var(--accent-blue), rgba(59,130,246,0.6)); }
+
+.poc-bar .bar-val {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.poc-group-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.4;
+}
+
+.poc-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.poc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.poc-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.poc-legend-swatch.robotics { background: var(--accent-rose); }
+.poc-legend-swatch.logistics { background: var(--accent-blue); }
+
+.poc-highlight-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 28px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,182,212,0.06));
+  border: 1px solid rgba(16,185,129,0.25);
+}
+.poc-highlight-banner .poc-arrow {
+  font-size: 28px;
+  color: var(--accent-emerald);
+  flex-shrink: 0;
+}
+.poc-highlight-stat {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-emerald);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.poc-highlight-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 12: DEMO
+   ═══════════════════════════════════════ */
+#slide-12 {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+}
+
+.demo-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+.demo-left .slide-title {
+  font-size: clamp(30px, 3.5vw, 48px);
+}
+.demo-left p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.demo-video {
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0f2e, #1a1040);
+  border: 1px solid rgba(139,92,246,0.2);
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.4s;
+}
+.demo-video:hover {
+  border-color: rgba(139,92,246,0.5);
+  box-shadow: 0 0 60px rgba(139,92,246,0.15);
+}
+.demo-video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(139,92,246,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(59,130,246,0.08) 0%, transparent 50%);
+}
+
+.play-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.demo-video:hover .play-btn {
+  background: rgba(139,92,246,0.3);
+  border-color: var(--accent-violet);
+  transform: scale(1.1);
+}
+.play-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+  margin-left: 4px;
+}
+
+.demo-caption {
+  font-size: 14px;
+  color: var(--text-dim);
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 13: ROADMAP
+   ═══════════════════════════════════════ */
+#slide-13 {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+}
+
+.roadmap-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.roadmap-left .slide-title {
+  font-size: clamp(30px, 3.5vw, 48px);
+}
+.roadmap-left p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.roadmap-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.roadmap-layer {
+  padding: 32px;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+  transition: all 0.4s;
+}
+.roadmap-layer:hover {
+  transform: translateX(8px);
+  border-color: rgba(139,92,246,0.3);
+}
+.roadmap-layer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-hero);
+}
+
+.roadmap-layer h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+}
+.roadmap-layer.data-layer { background: rgba(6,182,212,0.04); }
+.roadmap-layer.data-layer h3 { color: var(--accent-cyan); }
+.roadmap-layer.train-layer { background: rgba(139,92,246,0.04); }
+.roadmap-layer.train-layer h3 { color: var(--accent-violet); }
+.roadmap-layer.deploy-layer { background: rgba(59,130,246,0.04); }
+.roadmap-layer.deploy-layer h3 { color: var(--accent-blue); }
+
+.roadmap-layer p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 14: PRODUCT STRENGTHS
+   ═══════════════════════════════════════ */
+#slide-14 {
+  flex-direction: column;
+  gap: 56px;
+}
+
+.strengths-header {
+  text-align: center;
+}
+.strengths-header .slide-title {
+  font-size: clamp(30px, 3.5vw, 50px);
+}
+
+.strengths-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.pillar {
+  padding: 40px 32px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  text-align: center;
+  transition: all 0.4s;
+}
+.pillar:hover {
+  border-color: rgba(139,92,246,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+}
+
+.pillar-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.pillar:nth-child(1) .pillar-icon { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); }
+.pillar:nth-child(2) .pillar-icon { background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,182,212,0.1)); }
+.pillar:nth-child(3) .pillar-icon { background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(244,63,94,0.1)); }
+
+.pillar h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.pillar p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════
+   SLIDE 15: THE ASK
+   ═══════════════════════════════════════ */
+#slide-15 {
+  flex-direction: column;
+  gap: 48px;
+  background: linear-gradient(180deg, var(--bg-deep) 0%, rgba(139,92,246,0.04) 50%, var(--bg-deep) 100%);
+}
+
+.ask-header {
+  text-align: center;
+}
+.ask-amount {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.ask-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 960px;
+}
+
+.ask-funds {
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+}
+.ask-funds h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.donut-wrap {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.donut-chart {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  position: relative;
+}
+.donut-chart svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.donut-chart circle {
+  fill: none;
+  stroke-width: 18;
+  stroke-linecap: round;
+}
+
+.donut-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.donut-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.donut-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.ask-targets {
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+}
+.ask-targets h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.target-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.target-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.target-item strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.target-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+  background: var(--gradient-hero);
+}
+
+.ask-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border-radius: 12px;
+  background: var(--gradient-hero);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(139,92,246,0.3);
+}
+.ask-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(139,92,246,0.5);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .slide { padding: 40px 28px; }
+  #slide-2, #slide-3, #slide-5, #slide-7, #slide-11, #slide-12, #slide-13 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .traction-cols, .ask-body { grid-template-columns: 1fr; }
+  .cap-grid, .strengths-pillars { grid-template-columns: 1fr 1fr; }
+  .stakes-grid { grid-template-columns: 1fr 1fr; }
+  .nav-dots { right: 10px; }
+  .nav-dot .tooltip { display: none; }
+  .stair-step:not(.stair-apex), .stair-apex { margin-left: calc(var(--step) * 24px); }
+  .stair-connector { margin-left: calc(var(--step) * 24px + 42px); }
+}
+@media (max-width: 600px) {
+  .cap-grid, .strengths-pillars, .stakes-grid { grid-template-columns: 1fr; }
+  .market-chart { flex-direction: column; align-items: center; height: auto; }
+  .poc-chart { flex-direction: column; align-items: center; height: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ═══════ SLIDE 1: HERO ═══════ -->
+<section class="slide" id="slide-1">
+  <div class="hero-canvas" id="particleCanvas"></div>
+  <div class="hero-content">
+    <div class="hero-logo-wrap reveal">
+      <div class="hero-logo">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Brain half -->
+          <path d="M40 10 C28 10 18 20 18 32 C18 38 20 43 24 47 C20 50 18 55 18 60 C18 66 22 70 28 70 L40 70 L40 10Z" stroke="url(#g1)" stroke-width="1.5" fill="none"/>
+          <circle cx="28" cy="28" r="2.5" fill="#8b5cf6"/>
+          <circle cx="32" cy="40" r="2" fill="#6366f1"/>
+          <circle cx="26" cy="52" r="2.5" fill="#8b5cf6"/>
+          <line x1="28" y1="28" x2="32" y2="40" stroke="#8b5cf6" stroke-width="1" opacity="0.5"/>
+          <line x1="32" y1="40" x2="26" y2="52" stroke="#6366f1" stroke-width="1" opacity="0.5"/>
+          <!-- Globe/grid half -->
+          <path d="M40 10 C52 10 62 20 62 32 C62 38 60 43 56 47 C60 50 62 55 62 60 C62 66 58 70 52 70 L40 70 L40 10Z" stroke="url(#g2)" stroke-width="1.5" fill="none"/>
+          <ellipse cx="51" cy="40" rx="10" ry="20" stroke="#3b82f6" stroke-width="0.8" opacity="0.4" fill="none"/>
+          <line x1="42" y1="28" x2="61" y2="28" stroke="#3b82f6" stroke-width="0.6" opacity="0.3"/>
+          <line x1="42" y1="40" x2="62" y2="40" stroke="#3b82f6" stroke-width="0.6" opacity="0.3"/>
+          <line x1="42" y1="52" x2="61" y2="52" stroke="#3b82f6" stroke-width="0.6" opacity="0.3"/>
+          <defs>
+            <linearGradient id="g1" x1="18" y1="10" x2="40" y2="70">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="40" y1="10" x2="62" y2="70">
+              <stop offset="0%" stop-color="#3b82f6"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-line reveal reveal-delay-1"></div>
+    <h1 class="hero-title reveal reveal-delay-2">Neurosymbolic Intelligence Inc.</h1>
+    <p class="hero-tagline reveal reveal-delay-3">Verification-centric AI <strong>where the stakes are high.</strong></p>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 2: PARADIGM SHIFT ═══════ -->
+<section class="slide" id="slide-2">
+  <div class="paradigm-left">
+    <span class="slide-label reveal">01 — Vision</span>
+    <h2 class="slide-title reveal reveal-delay-1">The AI landscape needs a <em>paradigm shift</em></h2>
+  </div>
+  <div class="paradigm-right">
+    <div class="paradigm-block state reveal reveal-delay-2">
+      <h3>The state of AI</h3>
+      <p>Today's AI learns patterns <em>implicitly</em>&mdash;through massive data, models, and compute&mdash;making it inefficient and hard to trust.</p>
+    </div>
+    <div class="paradigm-block vision reveal reveal-delay-3">
+      <h3>Our neurosymbolic vision</h3>
+      <p>By <em>explicitly</em> embedding symbolic structures like physics and logic, AI can learn faster, generalize better, and be <em>mathematically verifiable</em> for trust.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 3: SYMBOLS → VERIFICATION ═══════ -->
+<section class="slide" id="slide-3">
+  <div class="verify-sidebar">
+    <span class="slide-label reveal">02 — Why Symbols</span>
+    <h2 class="slide-title reveal reveal-delay-1" style="font-size:clamp(28px,3vw,42px)">Symbols enable the next step in trusted AI: <em>verification</em></h2>
+    <div class="verify-sidebar-item reveal reveal-delay-2"><strong>Diminishing returns</strong> from scaling</div>
+    <div class="verify-sidebar-item reveal reveal-delay-3">Cannot deploy what <strong>you cannot trust</strong> in high-stakes applications</div>
+    <div class="verify-sidebar-item reveal reveal-delay-4">Trustworthy AI needs <strong>verifiability</strong></div>
+    <div class="verify-sidebar-item reveal reveal-delay-5">Verifiability needs <strong>structure</strong></div>
+  </div>
+  <div class="verify-staircase">
+    <div class="stair-step reveal reveal-delay-1" style="--step:0">
+      <div class="stair-icon">&#x1F4AC;</div>
+      <div class="stair-text">Chat fluently</div>
+    </div>
+    <div class="stair-connector" style="--step:0"></div>
+    <div class="stair-step reveal reveal-delay-2" style="--step:1">
+      <div class="stair-icon">&#x1F9E9;</div>
+      <div class="stair-text">Reason plausibly</div>
+    </div>
+    <div class="stair-connector" style="--step:1"></div>
+    <div class="stair-step reveal reveal-delay-3" style="--step:2">
+      <div class="stair-icon">&#x1F916;</div>
+      <div class="stair-text">Act as agent</div>
+    </div>
+    <div class="stair-connector" style="--step:2"></div>
+    <div class="stair-step stair-apex reveal reveal-delay-4" style="--step:3">
+      <div class="stair-icon">&#x2705;</div>
+      <div class="stair-text">Reason &amp; act with assurance, accountability, and trust for high-stake applications</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 4: TEAM ═══════ -->
+<section class="slide" id="slide-4">
+  <div class="team-header">
+    <span class="slide-label reveal">03 — Team</span>
+    <h2 class="slide-title reveal reveal-delay-1">A world-class team turning research breakthroughs into <em>verifiable AI systems</em></h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-row reveal reveal-delay-2">
+      <div class="team-card founder">
+        <div class="team-avatar"><img src="Photos/Alvaro.png" alt="Alvaro Velasquez"></div>
+        <div class="team-name">Alvaro Velasquez</div>
+        <div class="team-role">Co-founder, CEO</div>
+        <div class="team-desc">Former <strong>DARPA Program Manager</strong> (ANSR, TIAMAT), government &amp; national leader of neurosymbolic AI</div>
+      </div>
+      <div class="team-card founder">
+        <div class="team-avatar"><img src="Photos/Ufuk.png" alt="Ufuk Topcu"></div>
+        <div class="team-name">Ufuk Topcu</div>
+        <div class="team-role">Co-founder, CTO</div>
+        <div class="team-desc"><strong>Full Professor / IEEE Fellow</strong>, extensive DOD-backed research and transition on verifiable AI</div>
+      </div>
+    </div>
+    <div class="team-row reveal reveal-delay-3">
+      <div class="team-card core">
+        <div class="team-avatar"><img src="Photos/Christian.png" alt="Christian Ellis"></div>
+        <div class="team-name">Christian Ellis</div>
+        <div class="team-role">Head of Product</div>
+        <div class="team-desc">Embedded in Army research ecosystem</div>
+      </div>
+      <div class="team-card core">
+        <div class="team-avatar"><img src="Photos/Neel.png" alt="Neel Bhatt"></div>
+        <div class="team-name">Neel Bhatt</div>
+        <div class="team-role">Head of Research</div>
+        <div class="team-desc">Industrial research and development</div>
+      </div>
+      <div class="team-card core">
+        <div class="team-avatar"><img src="Photos/Yunhao.jpeg" alt="Yunhao Yang"></div>
+        <div class="team-name">Yunhao Yang</div>
+        <div class="team-role">Research Engineer</div>
+        <div class="team-desc">Experienced in AI systems development</div>
+      </div>
+    </div>
+    <div class="team-row reveal reveal-delay-4">
+      <div class="team-card advisor">
+        <div class="team-avatar"><img src="Photos/Atlas.jpeg" alt="Atlas Wang"></div>
+        <div class="team-name">Atlas Wang</div>
+        <div class="team-role">Advisor (AI)</div>
+        <div class="team-desc">Renowned AI leader with rich academic and entrepreneurial experience</div>
+      </div>
+      <div class="team-card advisor">
+        <div class="team-avatar"><img src="Photos/Marcus.jpeg" alt="Marcus Weller"></div>
+        <div class="team-name">Marcus Weller</div>
+        <div class="team-role">Advisor (Business)</div>
+        <div class="team-desc">Entrepreneur &amp; DARPA advisor</div>
+      </div>
+      <div class="team-card advisor">
+        <div class="team-avatar"><img src="Photos/Kimberly.jpeg" alt="Kimberly Sablon"></div>
+        <div class="team-name">Kimberly Sablon</div>
+        <div class="team-role">Advisor (Defense)</div>
+        <div class="team-desc">Former Principal Director for Trusted AI and Autonomy @ OUSD(R&amp;E)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 5: HIGH STAKES ═══════ -->
+<section class="slide" id="slide-5">
+  <div class="stakes-left">
+    <span class="slide-label reveal">04 — Applications</span>
+    <h2 class="slide-title reveal reveal-delay-1">Verification will matter when the <em>stakes are high</em></h2>
+    <div class="stakes-points reveal reveal-delay-2">
+      <div class="stakes-point"><span class="dot"></span>Unknown models</div>
+      <div class="stakes-point"><span class="dot"></span>Incomplete data</div>
+      <div class="stakes-point"><span class="dot"></span>Limited operating picture</div>
+      <div class="stakes-point"><span class="dot"></span>Ever changing requirements</div>
+    </div>
+    <p class="reveal reveal-delay-3" style="font-size:14px;color:var(--text-dim)">Verification-centric AI is built for the real world.</p>
+  </div>
+  <div class="stakes-grid">
+    <div class="stakes-card highlighted reveal reveal-delay-2">
+      <div class="stakes-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Contested Logistics</h3>
+    </div>
+    <div class="stakes-card reveal reveal-delay-3">
+      <div class="stakes-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Military Systems</h3>
+    </div>
+    <div class="stakes-card reveal reveal-delay-4">
+      <div class="stakes-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M8 12v6l4 4 4-4v-6"/><path d="M6 16h12"/></svg>
+      </div>
+      <h3>Safety-Critical Robotics</h3>
+    </div>
+    <div class="stakes-card reveal reveal-delay-5">
+      <div class="stakes-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="8" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="5" cy="16" r="2"/><circle cx="19" cy="16" r="2"/><line x1="7" y1="8" x2="9" y2="10"/><line x1="17" y1="8" x2="15" y2="10"/><line x1="7" y1="16" x2="9" y2="14"/><line x1="17" y1="16" x2="15" y2="14"/></svg>
+      </div>
+      <h3>Molecular Discovery</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 6: MARKET ═══════ -->
+<section class="slide" id="slide-6">
+  <div class="market-header">
+    <span class="slide-label reveal">05 — Market</span>
+    <h2 class="slide-title reveal reveal-delay-1">Market <em>opportunity</em></h2>
+    <p class="reveal reveal-delay-2" style="color:var(--text-secondary);margin-top:8px;font-size:16px">The intersection of AI and high-stake applications</p>
+  </div>
+  <div class="market-chart reveal reveal-delay-3" id="marketChart">
+    <div class="market-group">
+      <div class="market-bars">
+        <div class="market-bar-wrap">
+          <div class="market-bar y2025" data-height="87" style="height:0"><span class="bar-label">$100B</span></div>
+        </div>
+        <div class="market-bar-wrap">
+          <div class="market-bar y2030" data-height="260" style="height:0"><span class="bar-label">$300B</span></div>
+        </div>
+      </div>
+      <div class="market-group-label">TAM<br><span style="font-size:10px;color:var(--text-dim)">Total Addressable Market</span></div>
+    </div>
+    <div class="market-group">
+      <div class="market-bars">
+        <div class="market-bar-wrap">
+          <div class="market-bar y2025" data-height="22" style="height:0"><span class="bar-label">$25B</span></div>
+        </div>
+        <div class="market-bar-wrap">
+          <div class="market-bar y2030" data-height="87" style="height:0"><span class="bar-label">$100B</span></div>
+        </div>
+      </div>
+      <div class="market-group-label">SAM<br><span style="font-size:10px;color:var(--text-dim)">Serviceable Addressable</span></div>
+    </div>
+    <div class="market-group">
+      <div class="market-bars">
+        <div class="market-bar-wrap">
+          <div class="market-bar y2025" data-height="4" style="height:0"><span class="bar-label">$100M</span></div>
+        </div>
+        <div class="market-bar-wrap">
+          <div class="market-bar y2030" data-height="26" style="height:0"><span class="bar-label">$3B</span></div>
+        </div>
+      </div>
+      <div class="market-group-label">SOM<br><span style="font-size:10px;color:var(--text-dim)">Serviceable Obtainable</span></div>
+    </div>
+  </div>
+  <div class="market-legend reveal reveal-delay-4">
+    <div class="legend-item"><div class="legend-swatch y2025"></div>2025 Estimate (USD)</div>
+    <div class="legend-item"><div class="legend-swatch y2030"></div>2030 Estimate (USD)</div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 7: BUSINESS MODEL ═══════ -->
+<section class="slide" id="slide-7">
+  <div class="biz-left">
+    <span class="slide-label reveal">06 — Business Model</span>
+    <h2 class="slide-title reveal reveal-delay-1">Business model &amp; <em>Go-to-market</em></h2>
+    <div class="vaas-heading reveal reveal-delay-2">Verification-as-a-Service (VaaS)</div>
+    <div class="biz-cards">
+      <div class="biz-card reveal reveal-delay-3">
+        <h4>Subscriptions</h4>
+        <p>Usage-based access to verification-enabled models and pipelines for scalable experimentation.</p>
+      </div>
+      <div class="biz-card reveal reveal-delay-4">
+        <h4>License-based services</h4>
+        <p>Bespoke solutions for critical applications on proprietary data with verification built in.</p>
+      </div>
+    </div>
+  </div>
+  <div class="biz-right">
+    <div class="flywheel reveal reveal-delay-3">
+      <div class="fw-glow"></div>
+      <!--
+        Circle: center (180,180), radius 130
+        3 nodes at 120° apart:
+          Data:       270° → (180, 50)
+          Training:    30° → (292.6, 245)
+          Deployment: 150° → (67.4, 245)
+        Arcs span ~90° each (15° gap at each node)
+          Arc1: 285° → 15°   (Data → Training)
+          Arc2:  45° → 135°  (Training → Deployment)
+          Arc3: 165° → 255°  (Deployment → Data)
+      -->
+      <svg class="fw-svg" viewBox="0 0 360 360" fill="none">
+        <!-- Subtle background ring -->
+        <circle cx="180" cy="180" r="130" stroke="rgba(255,255,255,0.04)" stroke-width="28" fill="none"/>
+
+        <!-- Arc 1: Data(270°) → Training(30°), from 285° to 15° -->
+        <path id="fwArc1"
+          d="M 213.6 54.4 A 130 130 0 0 1 305.6 213.6"
+          stroke="url(#fwG1)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- Arc 2: Training(30°) → Deployment(150°), from 45° to 135° -->
+        <path id="fwArc2"
+          d="M 271.9 271.9 A 130 130 0 0 1 88.1 271.9"
+          stroke="url(#fwG2)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- Arc 3: Deployment(150°) → Data(270°), from 165° to 255° -->
+        <path id="fwArc3"
+          d="M 54.4 213.6 A 130 130 0 0 1 146.4 54.4"
+          stroke="url(#fwG3)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- Arrowheads (triangles at arc endpoints, tangent to circle) -->
+        <polygon points="305.6,213.6 303.4,202.6 313,205.2" fill="#8b5cf6" opacity="0.9"/>
+        <polygon points="88.1,271.9 98.7,275.5 91.7,282.5" fill="#3b82f6" opacity="0.9"/>
+        <polygon points="146.4,54.4 135.4,52.2 138,61.8" fill="#06b6d4" opacity="0.9"/>
+
+        <!-- Flowing particle dots along each arc -->
+        <circle class="fw-flow-dot" r="4.5">
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#fwArc1"/>
+          </animateMotion>
+        </circle>
+        <circle class="fw-flow-dot" r="4.5" style="fill:#3b82f6;filter:drop-shadow(0 0 6px rgba(59,130,246,0.8))">
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#fwArc2"/>
+          </animateMotion>
+        </circle>
+        <circle class="fw-flow-dot" r="4.5" style="fill:#06b6d4;filter:drop-shadow(0 0 6px rgba(6,182,212,0.8))">
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#fwArc3"/>
+          </animateMotion>
+        </circle>
+
+        <defs>
+          <linearGradient id="fwG1" x1="213" y1="54" x2="306" y2="214">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+          </linearGradient>
+          <linearGradient id="fwG2" x1="272" y1="272" x2="88" y2="272">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+          <linearGradient id="fwG3" x1="54" y1="214" x2="146" y2="54">
+            <stop offset="0%" stop-color="#3b82f6"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <!-- Center label -->
+      <div class="fw-center">
+        <div class="fw-center-title">Grow through<br>a flywheel</div>
+        <div class="fw-center-sub">Continuous loop</div>
+      </div>
+      <!-- Nodes -->
+      <div class="flywheel-node fw-data">
+        <div class="flywheel-node-dot">&#x1F4CA;</div>
+        <div class="flywheel-node-label">Data</div>
+      </div>
+      <div class="flywheel-node fw-training">
+        <div class="flywheel-node-dot">&#x2699;&#xFE0F;</div>
+        <div class="flywheel-node-label">Training</div>
+      </div>
+      <div class="flywheel-node fw-deploy">
+        <div class="flywheel-node-dot">&#x1F680;</div>
+        <div class="flywheel-node-label">Deployment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 8: TRACTION ═══════ -->
+<section class="slide" id="slide-8">
+  <div class="traction-header">
+    <span class="slide-label reveal">07 — Traction</span>
+    <h2 class="slide-title reveal reveal-delay-1">Company and <em>traction</em></h2>
+    <p class="traction-founded reveal reveal-delay-2">Neurosymbolic Intelligence Inc. founded in 2025.</p>
+  </div>
+  <div class="traction-cols">
+    <div class="traction-col reveal reveal-delay-3">
+      <h3>Deep R&D Foundation + Defensible IP</h3>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span><strong>&gt;$50M</strong> in funded research</span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span>Award-winning papers</span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span><strong>DARPA Disruptive Idea Award</strong></span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span><strong>3 patents</strong> filed (2 pending)</span></div>
+    </div>
+    <div class="traction-col reveal reveal-delay-4">
+      <h3>Partnerships and Product</h3>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span><strong>DARPA EEI</strong> selection</span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span>Partnered with <strong>Amazon Web Services</strong> (for a DIU program)</span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span><strong>MVP pilots</strong> ready</span></div>
+      <div class="traction-item"><span class="tick">&#x2713;</span><span>Growing <strong>DoD demand</strong></span></div>
+    </div>
+  </div>
+  <div class="partner-logos reveal reveal-delay-5">
+    <div class="partner-logo">DARPA</div>
+    <div class="partner-logo">NSF</div>
+    <div class="partner-logo">Dept. of Defense</div>
+    <div class="partner-logo">AWS</div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 9: LOGISTICS USE CASE ═══════ -->
+<section class="slide" id="slide-9">
+  <div class="logistics-network">
+    <div class="network-line" style="top:20%;left:5%;width:35%;transform:rotate(12deg);animation-delay:0s"></div>
+    <div class="network-line" style="top:40%;left:15%;width:45%;transform:rotate(-8deg);animation-delay:0.5s"></div>
+    <div class="network-line" style="top:60%;left:25%;width:50%;transform:rotate(5deg);animation-delay:1s"></div>
+    <div class="network-line" style="top:75%;left:10%;width:40%;transform:rotate(-15deg);animation-delay:1.5s"></div>
+    <div class="network-line" style="top:30%;left:55%;width:35%;transform:rotate(20deg);animation-delay:2s"></div>
+    <div class="network-line" style="top:55%;left:50%;width:40%;transform:rotate(-10deg);animation-delay:0.8s"></div>
+    <div class="network-node" style="top:18%;left:12%;animation-delay:0s"></div>
+    <div class="network-node" style="top:35%;left:42%;animation-delay:0.7s"></div>
+    <div class="network-node" style="top:60%;left:28%;animation-delay:1.4s"></div>
+    <div class="network-node" style="top:45%;left:72%;animation-delay:0.3s"></div>
+    <div class="network-node" style="top:72%;left:58%;animation-delay:1.1s"></div>
+    <div class="network-node" style="top:25%;left:78%;animation-delay:1.8s"></div>
+    <div class="network-node" style="top:80%;left:85%;animation-delay:0.5s"></div>
+  </div>
+
+  <div class="logistics-content">
+    <span class="slide-label reveal">08 — Use Case</span>
+    <h2 class="slide-title reveal reveal-delay-1" style="font-size:clamp(30px,3.5vw,48px);text-align:center;margin-bottom:8px">Use case: contested and <em>precise logistics</em></h2>
+    <p class="logistics-opener reveal reveal-delay-2">&ldquo;Logistics wins wars, but current solutions fail under uncertainty.&rdquo;</p>
+  </div>
+  <div class="pain-points" style="position:relative;z-index:2;">
+    <div class="pain-point reveal reveal-delay-3">
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <div class="pain-text"><strong>Neural AI has no guarantees</strong> <span class="pain-arrow">&rarr;</span> not trustworthy for precise logistics</div>
+    </div>
+    <div class="pain-point reveal reveal-delay-4">
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <div class="pain-text"><strong>Symbolic AI assumes perfect knowledge</strong> <span class="pain-arrow">&rarr;</span> poor at handling uncertainty and contested logistics</div>
+    </div>
+    <div class="pain-point reveal reveal-delay-5">
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <div class="pain-text"><strong>Days to compute optimized plans</strong> <span class="pain-arrow">&rarr;</span> precludes rapid replanning</div>
+    </div>
+  </div>
+  <div class="logistics-conclusion reveal reveal-delay-6" style="position:relative;z-index:2;">
+    Verification-centric, neurosymbolic AI will resolve the limitations of the SOTA AI and <strong>enable a revolution in logistics.</strong>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 10: CAPABILITIES ═══════ -->
+<section class="slide" id="slide-10">
+  <div class="cap-header">
+    <span class="slide-label reveal">09 — Capabilities</span>
+    <h2 class="slide-title reveal reveal-delay-1">What will verification-centric AI do that is <em>not possible today?</em></h2>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-card reveal reveal-delay-2">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <h3>Mission-traceable planning</h3>
+      <p>Converts opaque planning into provably correct decisions, enabling faster regulatory-ready adoption.</p>
+    </div>
+    <div class="cap-card reveal reveal-delay-3">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Quantified confidence &amp; self-check</h3>
+      <p>Enables self-checking that flags low-confidence actions, reducing risk and oversight costs.</p>
+    </div>
+    <div class="cap-card reveal reveal-delay-4">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M4 12h16"/><path d="M12 4v16"/></svg>
+      </div>
+      <h3>Adaptive rule enforcement</h3>
+      <p>Learns changing rules without retraining, driving recurring revenue through in-field adaptability.</p>
+    </div>
+    <div class="cap-card reveal reveal-delay-3">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3>End-to-end auditability</h3>
+      <p>Provides a transparent decision trail, essential for procurement and liability management.</p>
+    </div>
+    <div class="cap-card reveal reveal-delay-4">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>Rapid replanning</h3>
+      <p>Re-optimizes logistics in seconds, ensuring operational resilience and clear ROI.</p>
+    </div>
+    <div class="cap-card reveal reveal-delay-5">
+      <div class="cap-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg>
+      </div>
+      <h3>Edge-deployable</h3>
+      <p>Works at the tactical edge, expanding addressable markets in defense and industrial AI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 11: PROOF OF CONCEPT ═══════ -->
+<section class="slide" id="slide-11">
+  <div class="poc-left">
+    <span class="slide-label reveal">10 — Results</span>
+    <h2 class="slide-title reveal reveal-delay-1">Proof of <em>concept</em></h2>
+    <p class="reveal reveal-delay-2" style="font-size:15px;color:var(--text-secondary);line-height:1.6">Verification-centric foundation models drastically outperform SOTA LLMs.</p>
+    <div class="poc-callouts">
+      <div class="poc-callout highlight reveal reveal-delay-3">~30% higher compliance</div>
+      <div class="poc-callout metric reveal reveal-delay-4">Outperforms 20x to 200x larger models</div>
+      <div class="poc-callout metric reveal reveal-delay-5">Validated in robotics and logistics</div>
+    </div>
+  </div>
+  <div class="poc-right reveal reveal-delay-3">
+    <div class="poc-legend">
+      <div class="poc-legend-item"><div class="poc-legend-swatch robotics"></div>Robotics</div>
+      <div class="poc-legend-item"><div class="poc-legend-swatch logistics"></div>Logistics</div>
+    </div>
+    <div class="poc-chart" id="pocChart">
+      <div class="poc-group">
+        <div class="poc-bars">
+          <div class="poc-bar robotics" data-height="24" style="height:0"><span class="bar-val">~64</span></div>
+          <div class="poc-bar logistics" data-height="24" style="height:0"><span class="bar-val">~64</span></div>
+        </div>
+        <div class="poc-group-label">Small FM<br><span style="font-size:10px;color:var(--text-dim)">(~8B params)</span></div>
+      </div>
+      <div class="poc-group">
+        <div class="poc-bars">
+          <div class="poc-bar robotics" data-height="130" style="height:0"><span class="bar-val">~83</span></div>
+          <div class="poc-bar logistics" data-height="113" style="height:0"><span class="bar-val">~80</span></div>
+        </div>
+        <div class="poc-group-label">Large FM<br><span style="font-size:10px;color:var(--text-dim)">(~175B params)</span></div>
+      </div>
+      <div class="poc-group">
+        <div class="poc-bars">
+          <div class="poc-bar robotics" data-height="203" style="height:0"><span class="bar-val">~96</span></div>
+          <div class="poc-bar logistics" data-height="192" style="height:0"><span class="bar-val">~94</span></div>
+        </div>
+        <div class="poc-group-label">Verification-centric<br><span style="font-size:10px;color:var(--text-dim)">(~8B params)</span></div>
+      </div>
+    </div>
+    <div class="poc-highlight-banner">
+      <div class="poc-arrow">&uarr;</div>
+      <div class="poc-highlight-stat">~30% higher</div>
+      <div class="poc-highlight-desc">compliance vs SOTA &mdash; outperforms 20x to 200x larger models</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 12: DEMO ═══════ -->
+<section class="slide" id="slide-12">
+  <div class="demo-left">
+    <span class="slide-label reveal">11 — Prototype</span>
+    <h2 class="slide-title reveal reveal-delay-1">Prototype in contested <em>logistics</em></h2>
+    <p class="reveal reveal-delay-2">For a DIU proposal on military logistics, we have partnered with <strong style="color:var(--text-primary)">Amazon Web Services (AWS)</strong> to integrate our product into the AWS logistics platform.</p>
+  </div>
+  <div class="demo-video reveal reveal-delay-3" id="demoVideoWrap">
+    <div class="play-btn" id="demoPlayBtn">
+      <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+    </div>
+    <div class="demo-caption" id="demoCaption">Click to play demo video</div>
+    <iframe id="demoIframe"
+      src="https://drive.google.com/file/d/1GW3GSZ8XPT-XDkC88PWZm6Miohabte2B/preview"
+      style="position:absolute;inset:0;width:100%;height:100%;border:none;opacity:0;pointer-events:none;z-index:2;border-radius:16px;"
+      allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 13: ROADMAP ═══════ -->
+<section class="slide" id="slide-13">
+  <div class="roadmap-left">
+    <span class="slide-label reveal">12 — Technology</span>
+    <h2 class="slide-title reveal reveal-delay-1">Technical <em>roadmap</em></h2>
+    <p class="reveal reveal-delay-2">Efficient trusted models through <strong style="color:var(--text-primary)">full-stack integration of verification</strong>.</p>
+  </div>
+  <div class="roadmap-stack">
+    <div class="roadmap-layer data-layer reveal reveal-delay-2">
+      <h3>Data</h3>
+      <p>Convert informal data into formally verifiable representations and collect verified data generated during deployment.</p>
+    </div>
+    <div class="roadmap-layer train-layer reveal reveal-delay-3">
+      <h3>Training</h3>
+      <p>Verification guides the fine-tuning and uncertainty mitigation of small models from small but high-quality data.</p>
+    </div>
+    <div class="roadmap-layer deploy-layer reveal reveal-delay-4">
+      <h3>Deployment</h3>
+      <p>AI responses are augmented with verifiably retrieved data and projected to trusted regions of behavior.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 14: PRODUCT STRENGTHS ═══════ -->
+<section class="slide" id="slide-14">
+  <div class="strengths-header">
+    <span class="slide-label reveal">13 — Product</span>
+    <h2 class="slide-title reveal reveal-delay-1">Product <em>strengths</em></h2>
+  </div>
+  <div class="strengths-pillars">
+    <div class="pillar reveal reveal-delay-2">
+      <div class="pillar-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><line x1="8.5" y1="7.5" x2="9.5" y2="9.5"/><line x1="15.5" y1="7.5" x2="14.5" y2="9.5"/></svg>
+      </div>
+      <h3>Integrated Intelligence</h3>
+      <p>One platform for neural + symbolic AI. Continuous feedback &amp; improvement.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-3">
+      <div class="pillar-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Trust by Design</h3>
+      <p>Domain-specific compliance as first-class citizens. Explainable and traceable decisions.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-4">
+      <div class="pillar-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Ready for the Real World</h3>
+      <p>Broadly compatible with existing LLMs &hellip; with higher data efficiency &amp; lower cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SLIDE 15: THE ASK ═══════ -->
+<section class="slide" id="slide-15">
+  <div class="ask-header">
+    <span class="slide-label reveal">14 — The Ask</span>
+    <h2 class="ask-amount reveal reveal-delay-1">$10M Seed to Scale Verification-Centric AI<br>@ 100M Cap for 24 months</h2>
+  </div>
+  <div class="ask-body">
+    <div class="ask-funds reveal reveal-delay-2">
+      <h3>Use of Funds</h3>
+      <div class="donut-wrap">
+        <div class="donut-chart">
+          <svg viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="60" stroke="rgba(255,255,255,0.04)" stroke-width="18"/>
+            <!-- 40% product = 0 to 144deg -->
+            <circle cx="80" cy="80" r="60" stroke="#8b5cf6" stroke-width="18"
+              stroke-dasharray="150.8 376.99"
+              stroke-dashoffset="0"
+              class="donut-seg"/>
+            <!-- 20% pilots = 144 to 216deg -->
+            <circle cx="80" cy="80" r="60" stroke="#3b82f6" stroke-width="18"
+              stroke-dasharray="75.4 376.99"
+              stroke-dashoffset="-150.8"
+              class="donut-seg"/>
+            <!-- 40% team = 216 to 360deg -->
+            <circle cx="80" cy="80" r="60" stroke="#06b6d4" stroke-width="18"
+              stroke-dasharray="150.8 376.99"
+              stroke-dashoffset="-226.2"
+              class="donut-seg"/>
+          </svg>
+        </div>
+        <div class="donut-items">
+          <div class="donut-item">
+            <div class="donut-swatch" style="background:#8b5cf6"></div>
+            <div><strong style="color:var(--text-primary)">40% Product &amp; Platform</strong><br>Expand verification-centric foundation model, harden deployment pipelines</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-swatch" style="background:#3b82f6"></div>
+            <div><strong style="color:var(--text-primary)">20% Customer Pilots</strong><br>Transition DoD and AWS pilots to operational deployments</div>
+          </div>
+          <div class="donut-item">
+            <div class="donut-swatch" style="background:#06b6d4"></div>
+            <div><strong style="color:var(--text-primary)">40% Team &amp; IP</strong><br>Key hires, new patents, and go-to-market acceleration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ask-targets reveal reveal-delay-3">
+      <h3>18&ndash;24 Month Targets</h3>
+      <div class="target-items">
+        <div class="target-item">
+          <div class="target-bullet"></div>
+          <div><strong>&gt;$5M ARR</strong> through defense and commercial contracts</div>
+        </div>
+        <div class="target-item">
+          <div class="target-bullet"></div>
+          <div><strong>Operational deployments</strong> in contested logistics and robotics</div>
+        </div>
+        <div class="target-item">
+          <div class="target-bullet"></div>
+          <div><strong>Series A readiness</strong> &mdash; validated demand and scalable revenue model</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="ask-cta reveal reveal-delay-4" href="mailto:">
+    Let's Build the Future of Trusted AI
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</section>
+
+<script>
+// ── Particles ──
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  for(let i = 0; i < 60; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random()*100 + '%';
+    p.style.top = (60 + Math.random()*60) + '%';
+    p.style.setProperty('--dx', (Math.random()-0.5)*100 + 'px');
+    p.style.animationDuration = (8 + Math.random()*12) + 's';
+    p.style.animationDelay = Math.random()*10 + 's';
+    p.style.width = p.style.height = (1.5 + Math.random()*2) + 'px';
+    p.style.opacity = 0.15 + Math.random()*0.3;
+    canvas.appendChild(p);
+  }
+})();
+
+// ── Nav dots ──
+const slideNames = ['Title','Vision','Why Symbols','Team','Applications','Market','Business','Traction','Logistics','Capabilities','Results','Prototype','Technology','Product','The Ask'];
+const dotsContainer = document.getElementById('navDots');
+const slides = document.querySelectorAll('.slide');
+
+slides.forEach((s, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot';
+  dot.innerHTML = `<span class="tooltip">${slideNames[i]}</span>`;
+  dot.addEventListener('click', () => s.scrollIntoView({behavior:'smooth'}));
+  dotsContainer.appendChild(dot);
+});
+
+// ── Intersection Observer for reveals + active dot ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      // Reveal
+      entry.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      // Active dot
+      const idx = Array.from(slides).indexOf(entry.target);
+      document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+      // Animate bars
+      if(entry.target.id === 'slide-6') animateMarketBars();
+      if(entry.target.id === 'slide-11') animatePocBars();
+    }
+  });
+}, { threshold: 0.3 });
+
+slides.forEach(s => observer.observe(s));
+
+// ── Bar animations ──
+let marketAnimated = false;
+function animateMarketBars(){
+  if(marketAnimated) return;
+  marketAnimated = true;
+  document.querySelectorAll('#marketChart .market-bar').forEach(bar => {
+    bar.style.height = bar.dataset.height + 'px';
+  });
+}
+
+let pocAnimated = false;
+function animatePocBars(){
+  if(pocAnimated) return;
+  pocAnimated = true;
+  document.querySelectorAll('#pocChart .poc-bar').forEach(bar => {
+    bar.style.height = bar.dataset.height + 'px';
+  });
+}
+
+// ── Demo video ──
+document.getElementById('demoVideoWrap').addEventListener('click', function(e){
+  const iframe = document.getElementById('demoIframe');
+  const btn = document.getElementById('demoPlayBtn');
+  const cap = document.getElementById('demoCaption');
+  if(iframe.style.opacity === '0'){
+    iframe.style.opacity = '1';
+    iframe.style.pointerEvents = 'auto';
+    btn.style.display = 'none';
+    cap.style.display = 'none';
+    this.style.cursor = 'default';
+  }
+});
+
+// ── Keyboard nav ──
+document.addEventListener('keydown', e => {
+  const current = Array.from(slides).findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top >= -100 && r.top < window.innerHeight/2;
+  });
+  if(e.key === 'ArrowDown' && current < slides.length-1){
+    e.preventDefault();
+    slides[current+1].scrollIntoView({behavior:'smooth'});
+  }
+  if(e.key === 'ArrowUp' && current > 0){
+    e.preventDefault();
+    slides[current-1].scrollIntoView({behavior:'smooth'});
+  }
+});
+</script>
+</body>
+</html>
